@@ -14,7 +14,7 @@ BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: clthreads-devel
 BuildRequires: clalsadrv-devel
 BuildRequires: clxclient-devel
-BuildRequires: jack-devel
+BuildRequires: libjack-devel
 
 %description
 Aeolus is a synthesised (i.e. not sampled) pipe organ emulator that 
