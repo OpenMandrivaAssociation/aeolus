@@ -9,6 +9,7 @@ Group:	       System/Libraries
 Source0:       %{name}-%{version}-2.tar.bz2
 Patch0:        aeolus-0.6.6-2-fix-install.patch
 URL: 	       http://users.skynet.be/solaris/linuxaudio/getit.html
+BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 BuildRequires: clthreads-devel
 BuildRequires: clalsadrv-devel
