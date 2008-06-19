@@ -3,7 +3,7 @@
 Name:          aeolus
 Summary:       Synthesised pipe organ emulator
 Version:       0.6.6
-Release:       %mkrel 1
+Release:       %mkrel 2
 License:       GPL
 Group:	       System/Libraries 
 Source0:       %{name}-%{version}-2.tar.bz2
