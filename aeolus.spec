@@ -1,16 +1,15 @@
-%define	libname	%mklibname %name
-
 Name:          aeolus
 Summary:       Synthesised pipe organ emulator
 Version:       0.6.6
-Release:       %mkrel 2
-License:       GPL
+Release:       %mkrel 3
+License:       GPLv2+
 Group:	       System/Libraries 
-Source0:       %{name}-%{version}-2.tar.bz2
+Source0:       http://www.kokkinizita.net/linuxaudio/downloads/%{name}-%{version}-2.tar.bz2
+Source1:       http://www.kokkinizita.net/linuxaudio/downloads/stops-0.3.0.tar.bz2
 Patch0:        aeolus-0.6.6-2-fix-install.patch
 URL: 	       http://users.skynet.be/solaris/linuxaudio/getit.html
 BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-
+Obsoletes:     %mklibname %name
 BuildRequires: clthreads-devel
 BuildRequires: clalsadrv-devel
 BuildRequires: clxclient-devel
@@ -33,42 +32,32 @@ e.g. a 1GHz, 256Mb machine.
 
 %files
 %defattr(-,root,root)
+%config %{_sysconfdir}/%name.conf
 %_bindir/aeolus
-
-#--------------------------------------------------------------------
-
-%package -n	%libname
-Group: 		System/Libraries
-Summary: 	Libraries for %name
-Provides: 	lib%name = %version-%release
-Requires:       %name  = %version-%release
-
-%description  -n %libname
-%name Libraries
-
-%if %mdkversion < 200900
-%post -n %libname -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%postun -n %libname -p /sbin/ldconfig
-%endif
-
-%files -n %libname
-%defattr(-,root,root)
+%_datadir/stops
 %_libdir/aeolus_txt.so
 %_libdir/aeolus_x11.so
 #--------------------------------------------------------------------
 
 %prep
-%setup -q -n %name-%version
+%setup -q -n %name-%version -a1
 %patch0 -p0
+sed -i -e 's#-O3#%{optflags}#' Makefile
 
 %build
-
 %make
 
 %install
-make DESTDIR=%buildroot  install
+rm -fr %buildroot
+%makeinstall_std
+
+mkdir -p %buildroot%_datadir/stops
+cp -fr stops-0.3.0/* %buildroot%_datadir/stops/
+
+mkdir -p %buildroot%_sysconfdir/
+cat > %buildroot%_sysconfdir/%name.conf <<EOF
+-S %_datadir/stops
+EOF
 
 %clean
-
+rm -fr %buildroot
