@@ -1,9 +1,9 @@
 Name:          aeolus
 Summary:       Synthesised pipe organ emulator
 Version:       0.6.6
-Release:       %mkrel 3
+Release:       %mkrel 4
 License:       GPLv2+
-Group:	       System/Libraries 
+Group:	       Sound
 Source0:       http://www.kokkinizita.net/linuxaudio/downloads/%{name}-%{version}-2.tar.bz2
 Source1:       http://www.kokkinizita.net/linuxaudio/downloads/stops-0.3.0.tar.bz2
 Patch0:        aeolus-0.6.6-2-fix-install.patch
