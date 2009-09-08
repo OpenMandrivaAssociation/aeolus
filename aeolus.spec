@@ -1,13 +1,13 @@
 Name:          aeolus
 Summary:       Synthesised pipe organ emulator
-Version:       0.6.6
-Release:       %mkrel 4
+Version:       0.8.2
+Release:       %mkrel 1
 License:       GPLv2+
 Group:	       Sound
-Source0:       http://www.kokkinizita.net/linuxaudio/downloads/%{name}-%{version}-2.tar.bz2
+Source0:       http://www.kokkinizita.net/linuxaudio/downloads/%{name}-%{version}.tar.bz2
 Source1:       http://www.kokkinizita.net/linuxaudio/downloads/stops-0.3.0.tar.bz2
 Patch0:        aeolus-0.6.6-2-fix-install.patch
-URL: 	       http://users.skynet.be/solaris/linuxaudio/getit.html
+URL: 	       http://www.kokkinizita.net/linuxaudio/aeolus/index.html
 BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Obsoletes:     %mklibname %name
 BuildRequires: clthreads-devel
@@ -49,7 +49,7 @@ sed -i -e 's#-O3#%{optflags}#' Makefile
 
 %install
 rm -fr %buildroot
-%makeinstall_std
+%makeinstall_std PREFIX=%{_prefix}
 
 mkdir -p %buildroot%_datadir/stops
 cp -fr stops-0.3.0/* %buildroot%_datadir/stops/
