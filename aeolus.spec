@@ -1,7 +1,7 @@
 Name:          aeolus
 Summary:       Synthesised pipe organ emulator
 Version:       0.8.2
-Release:       %mkrel 1
+Release:       %mkrel 2
 License:       GPLv2+
 Group:	       Sound
 Source0:       http://www.kokkinizita.net/linuxaudio/downloads/%{name}-%{version}.tar.bz2
