@@ -1,7 +1,7 @@
 Name:          aeolus
 Summary:       Synthesised pipe organ emulator
 Version:       0.8.2
-Release:       %mkrel 2
+Release:       %mkrel 3
 License:       GPLv2+
 Group:	       Sound
 Source0:       http://www.kokkinizita.net/linuxaudio/downloads/%{name}-%{version}.tar.bz2
@@ -14,6 +14,7 @@ BuildRequires: clthreads-devel
 BuildRequires: clalsadrv-devel
 BuildRequires: clxclient-devel
 BuildRequires: libjack-devel
+BuildRequires: readline-devel
 
 %description
 Aeolus is a synthesised (i.e. not sampled) pipe organ emulator that 
