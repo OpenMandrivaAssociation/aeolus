@@ -1,14 +1,14 @@
 Name:          aeolus
 Summary:       Synthesised pipe organ emulator
 Version:       0.8.2
-Release:       %mkrel 4
-License:       GPLv2+ and GFDL
+Release:       %mkrel 5
+License:       GPLv2+ and CC-BY-SA
 Group:	       Sound
 Source0:       http://www.kokkinizita.net/linuxaudio/downloads/%{name}-%{version}.tar.bz2
 Source1:       http://www.kokkinizita.net/linuxaudio/downloads/stops-0.3.0.tar.bz2
 Source2:       %{name}.desktop
 # http://commons.wikimedia.org/wiki/File:Logo_aeolus.png / resized to 48x48
-# GFDL License
+# CC-BY-SA License
 Source3:       %{name}48x48.png
 Patch0:        aeolus-0.6.6-2-fix-install.patch
 Patch1:        aeolus-0.8.2-fix-linkage.patch
