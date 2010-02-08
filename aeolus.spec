@@ -1,7 +1,7 @@
 Name:          aeolus
 Summary:       Synthesised pipe organ emulator
 Version:       0.8.2
-Release:       %mkrel 5
+Release:       %mkrel 6
 License:       GPLv2+ and CC-BY-SA
 Group:	       Sound
 Source0:       http://www.kokkinizita.net/linuxaudio/downloads/%{name}-%{version}.tar.bz2
@@ -53,6 +53,9 @@ e.g. a 1GHz, 256Mb machine.
 %patch0 -p0
 %patch1 -p1 -b .linkage
 sed -i -e 's#-O3#%{optflags}#' Makefile
+
+# fix wrong perms
+chmod +r stops-0.3.0/*
 
 %build
 %make PREFIX=%{_prefix}
