@@ -1,7 +1,7 @@
 Name:          aeolus
 Summary:       Synthesised pipe organ emulator
-Version:       0.8.2
-Release:       %mkrel 6
+Version:       0.8.4
+Release:       %mkrel 1
 License:       GPLv2+ and CC-BY-SA
 Group:	       Sound
 Source0:       http://www.kokkinizita.net/linuxaudio/downloads/%{name}-%{version}.tar.bz2
@@ -10,13 +10,11 @@ Source2:       %{name}.desktop
 # http://commons.wikimedia.org/wiki/File:Logo_aeolus.png / resized to 48x48
 # CC-BY-SA License
 Source3:       %{name}48x48.png
-Patch0:        aeolus-0.6.6-2-fix-install.patch
-Patch1:        aeolus-0.8.2-fix-linkage.patch
 URL: 	       http://www.kokkinizita.net/linuxaudio/aeolus/index.html
 BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Obsoletes:     %mklibname %{name}
 BuildRequires: clthreads-devel
-BuildRequires: clalsadrv-devel
+BuildRequires: clalsadrv-devel >= 2.0.0
 BuildRequires: clxclient-devel
 BuildRequires: libjack-devel
 BuildRequires: readline-devel
@@ -50,19 +48,25 @@ e.g. a 1GHz, 256Mb machine.
 
 %prep
 %setup -q -n %{name}-%{version} -a1
-%patch0 -p0
-%patch1 -p1 -b .linkage
-sed -i -e 's#-O3#%{optflags}#' Makefile
 
 # fix wrong perms
 chmod +r stops-0.3.0/*
+cd source
+sed -i -e 's/PREFIX =/#PREFIX =/g' Makefile
+sed -i -e 's/-lXft//g' Makefile
+sed -i -e 's/-lrt//g' Makefile
+sed -i -e 's/\/sbin\/ldconfig/#\/sbin\/ldconfig/g' Makefile
+sed -i -e 's#-O3#%{optflags}#' Makefile
 
 %build
-%make PREFIX=%{_prefix}
+cd source
+PREFIX=%{_prefix} %make
 
 %install
 rm -fr %{buildroot}
-%makeinstall_std PREFIX=%{_prefix}
+cd source
+PREFIX=%{_prefix} %makeinstall_std 
+cd ..
 
 mkdir -p %{buildroot}%{_datadir}/%{name}/stops
 cp -fr stops-0.3.0/* %{buildroot}%{_datadir}/%{name}/stops/
