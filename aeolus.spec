@@ -1,7 +1,7 @@
 Summary:	Synthesized pipe organ emulator
 Name:		aeolus
 Version:	0.9.0
-Release:	2
+Release:	3
 License:	GPLv2+ and CC-BY-SA
 Group:		Sound
 Url:		http://okkinizita.net/linuxaudio/aeolus/index.html
@@ -10,6 +10,7 @@ Source1:	http://kokkinizita.linuxaudio.org/linuxaudio/downloads/stops-0.3.0.tar.
 # http://commons.wikimedia.org/wiki/File:Logo_aeolus.png / resized to 48x48
 # CC-BY-SA License
 Source2:	%{name}48x48.png
+Patch0:		aeolus-0.9.0-makefile.patch
 BuildRequires:	clthreads-devel >= 2.4.0
 BuildRequires:	clxclient-devel >= 3.9.0
 BuildRequires:	readline-devel
@@ -28,7 +29,7 @@ stereo, surround or Ambisonics output, flexible audio controls
 including a large church reverb.
 
 Aeolus is not very CPU-hungry, and should run without problems on a
-e.g. a 1GHz, 256MB machine. 
+e.g. a 1GHz, 256MB machine.
 
 %files
 %config %{_sysconfdir}/%{name}.conf
@@ -42,24 +43,24 @@ e.g. a 1GHz, 256MB machine.
 
 %prep
 %setup -q -a1
+%patch0 -p1
 
 # fix wrong perms
 chmod +r stops-0.3.0/*
-cd source
-sed -i -e 's/PREFIX =/#PREFIX =/g' Makefile
+pushd source
 sed -i -e 's/-lXft//g' Makefile
 sed -i -e 's/-lrt//g' Makefile
-sed -i -e '/ldconfig/d' Makefile
 sed -i -e 's#-O3#%{optflags}#' Makefile
+popd
 
 %build
 cd source
 PREFIX=%{_prefix} %make
 
 %install
-cd source
+pushd source
 PREFIX=%{_prefix} %makeinstall_std
-cd ..
+popd
 
 mkdir -p %{buildroot}%{_datadir}/%{name}/stops
 cp -fr stops-0.3.0/* %{buildroot}%{_datadir}/%{name}/stops/
