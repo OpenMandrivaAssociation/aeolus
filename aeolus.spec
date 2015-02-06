@@ -1,7 +1,7 @@
 Summary:	Synthesized pipe organ emulator
 Name:		aeolus
 Version:	0.9.0
-Release:	3
+Release:	4
 License:	GPLv2+ and CC-BY-SA
 Group:		Sound
 Url:		http://okkinizita.net/linuxaudio/aeolus/index.html
