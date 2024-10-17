@@ -4,7 +4,7 @@ Version:	0.9.0
 Release:	4
 License:	GPLv2+ and CC-BY-SA
 Group:		Sound
-Url:		http://okkinizita.net/linuxaudio/aeolus/index.html
+Url:		https://okkinizita.net/linuxaudio/aeolus/index.html
 Source0:	http://kokkinizita.linuxaudio.org/linuxaudio/downloads/%{name}-%{version}.tar.bz2
 Source1:	http://kokkinizita.linuxaudio.org/linuxaudio/downloads/stops-0.3.0.tar.bz2
 # http://commons.wikimedia.org/wiki/File:Logo_aeolus.png / resized to 48x48
